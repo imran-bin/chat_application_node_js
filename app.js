@@ -5,10 +5,14 @@ const mongoose = require("mongoose")
 const path = require("path")
 const cookieParser = require("cookie-parser")
 
-
+// Mongo db run command 
+// 1.sudo systemctl start mongod
+// 2.sudo systemctl status mongod
 // internal import
 const {notFoundHandaler,errorHandaler} = require('./middlewares/common/errorHandaler')
 const loginRouter = require("./router/loginRouter")
+const usersRouter = require("./router/usersRouter")
+const inboxRouter = require("./router/inboxRouter")
 
 const app = express()
 
@@ -41,7 +45,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 // routing setup
 app.use("/",loginRouter)
-app.use("/users",userRouter)
+app.use("/users",usersRouter)
 app.use("/inbox",inboxRouter)
 // 404 not found handaler
 app.use(notFoundHandaler)
